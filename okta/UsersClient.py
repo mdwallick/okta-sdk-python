@@ -12,6 +12,10 @@ class UsersClient(ApiClient):
     def __init__(self, *args, **kwargs):
         kwargs['pathname'] = '/api/v1/users'
         ApiClient.__init__(self, *args, **kwargs)
+        
+        self.user_class = User
+        if "user_class" in kwargs and kwargs["user_class"]:
+            self.user_class = kwargs["user_class"]
 
     # CRUD
 
@@ -32,7 +36,7 @@ class UsersClient(ApiClient):
             'filter': filter_string
         }
         response = ApiClient.get_path(self, '/', params=params)
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def get_user(self, uid):
         """Get a single user
@@ -42,7 +46,7 @@ class UsersClient(ApiClient):
         :rtype: User
         """
         response = ApiClient.get_path(self, '/{0}'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def get_user_applinks(self, uid):
         """Get applinks of a single user
@@ -54,26 +58,31 @@ class UsersClient(ApiClient):
         response = ApiClient.get_path(self, '/{0}/appLinks'.format(uid))
         return Utils.deserialize(response.text, AppLinks)
 
-    def update_user(self, user):
+    def update_user(self, user, partial=True):
         """Update a user
 
         :param user: the user to update
         :type user: User
         :rtype: User
         """
-        return self.update_user_by_id(user.id, user)
+        return self.update_user_by_id(user.id, user, partial)
 
-    def update_user_by_id(self, uid, user):
+    def update_user_by_id(self, uid, user, partial=True):
         """Update a user, defined by an id
 
         :param uid: the target user id
         :type uid: str
         :param user: the data to update the target user
         :type user: User
+        :param partial: whether to do a partial (true) or full (false) update
+        :type partial: bool
         :rtype: User
         """
-        response = ApiClient.put_path(self, '/{0}'.format(uid), user)
-        return Utils.deserialize(response.text, User)
+        if partial:
+            response = ApiClient.post_path(self, '/{0}'.format(uid), user)
+        else:
+            response = ApiClient.put_path(self, '/{0}'.format(uid), user)
+        return Utils.deserialize(response.text, self.user_class)
 
     def create_user(self, user, activate=None):
         """Create a user
@@ -91,7 +100,7 @@ class UsersClient(ApiClient):
                 'activate': activate
             }
             response = ApiClient.post_path(self, '/', user, params=params)
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def delete_user(self, uid):
         """Delete user by target id
@@ -101,7 +110,7 @@ class UsersClient(ApiClient):
         :return: None
         """
         response = ApiClient.delete_path(self, '/{0}'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def get_paged_users(self, limit=None, filter_string=None, after=None, url=None):
         """Get a paged list of Users
@@ -125,7 +134,7 @@ class UsersClient(ApiClient):
                 'filter': filter_string
             }
             response = ApiClient.get_path(self, '/', params=params)
-        return PagedResults(response, User)
+        return PagedResults(response, self.user_class)
 
     # LIFECYCLE
     
@@ -137,7 +146,7 @@ class UsersClient(ApiClient):
         :return: User
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/activate'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def deactivate_user(self, uid):
         """Deactivate user by target id
@@ -147,7 +156,7 @@ class UsersClient(ApiClient):
         :return: User
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def suspend_user(self, uid):
         """Suspend user by target id
@@ -157,7 +166,7 @@ class UsersClient(ApiClient):
         :return: User
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/suspend'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def unsuspend_user(self, uid):
         """Unsuspend user by target id
@@ -167,7 +176,7 @@ class UsersClient(ApiClient):
         :return: User
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/unsuspend'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def unlock_user(self, uid):
         """Unlock user by target id
@@ -177,7 +186,7 @@ class UsersClient(ApiClient):
         :return: User
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/unlock'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)
 
     def reset_password(self, uid, send_email=True):
         """Reset user's password by target user id
@@ -242,4 +251,4 @@ class UsersClient(ApiClient):
         :return: None
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/reset_factors'.format(uid))
-        return Utils.deserialize(response.text, User)
+        return Utils.deserialize(response.text, self.user_class)

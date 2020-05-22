@@ -64,9 +64,12 @@ class User:
 
         self.links = None
 
+        self.set_profile(**kwargs)
+
+    def set_profile(self, **kwargs):
         # Populate profile
-        profile_attrs = ['login', 'email', 'secondEmail', 'firstName', 'lastName', 'mobilePhone']
+        self.profile = self.profile or UserProfile()
+        profile_attrs = self.profile.types
         for attr in profile_attrs:
             if attr in kwargs:
-                self.profile = self.profile or UserProfile()
                 setattr(self.profile, attr, kwargs[attr])
