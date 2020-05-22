@@ -1,4 +1,4 @@
-from Verification import Verification
+from okta.models.factor.Verification import Verification
 
 
 class FactorDeviceEnrollRequest:
