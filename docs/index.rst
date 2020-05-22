@@ -1,5 +1,5 @@
 Okta: Legacy Okta SDK for Python
-===========================
+================================
 
 This SDK allows you to manage your Okta instance using Python.
 
