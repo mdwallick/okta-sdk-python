@@ -4,7 +4,7 @@ from okta.framework.Utils import Utils
 
 
 class Serializer(JSONEncoder):
-    def default(self, obj):
+    def default(self, obj): # pylint: disable=method-hidden
         if isinstance(obj, datetime):
             return obj.strftime('dt(%Y-%m-%dT%H:%M:%SZ)')
         elif isinstance(obj, object):
