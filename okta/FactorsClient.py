@@ -196,7 +196,7 @@ class FactorsClient(ApiClient):
         :type factor_device_request: FactorDeviceRequest
         :rtype: FactorDevice
         """
-        response = ApiClient.post_path(self, '/{0}/factors/{1}'.format(user_id), factor_device_request)
+        response = ApiClient.post_path(self, '/{0}/factors'.format(user_id), factor_device_request)
         return Utils.deserialize(response.text, FactorDevice)
 
     # FACTOR DEVICE LIFECYCLE
