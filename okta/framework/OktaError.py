@@ -6,8 +6,14 @@ class OktaError(Exception):
 
         Exception.__init__(self, error.get('errorSummary'))
 
-        self.error_causes = error.get('errorCauses')
+        self.error_causes = self.__build_string(error.get('errorCauses'))
         self.error_code = error.get('errorCode')
         self.error_id = error.get('errorId')
         self.error_link = error.get('errorLink')
         self.error_summary = error.get('errorSummary')
+    
+    def __build_string(self, str_list):
+        result = []
+        for error in str_list:
+            result.append(error['errorSummary'])
+        return '\n'.join(result)
