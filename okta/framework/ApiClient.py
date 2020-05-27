@@ -99,7 +99,7 @@ class ApiClient(object):
 
         # If we made it this far, we need to handle an exception
         if attempts >= self.max_attempts or resp.status_code != 429:
-            raise OktaError(json.loads(resp.text))
+            raise OktaError(json.loads(resp.text), resp.status_code)
 
         # Assume we're going to retry with exponential backoff
         time.sleep(2 ** (attempts - 1))
