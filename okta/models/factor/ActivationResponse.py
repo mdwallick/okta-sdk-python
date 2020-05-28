@@ -10,7 +10,8 @@ class ActivationResponse:
         'sharedSecret': str,
         'encoding': str,
         'keyLength': int,
-        'factorResult': str
+        'factorResult': str,
+        'status': str
     }
 
     dict_types = {
@@ -32,5 +33,7 @@ class ActivationResponse:
         self.keyLength = None
 
         self.factorResult = None
+
+        self.status = None
 
         self.links = None
