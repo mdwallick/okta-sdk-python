@@ -1,15 +1,16 @@
+from datetime import datetime
 from okta.models.Link import Link
 
 
-class EmbeddedFactor:
+class ActivationResponse:
 
     types = {
+        'expiresAt': datetime,
         'timeStep': int,
         'sharedSecret': str,
         'encoding': str,
         'keyLength': int,
-        'factorResult': str,
-        'links': dict
+        'factorResult': str
     }
 
     dict_types = {
