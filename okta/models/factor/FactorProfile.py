@@ -5,7 +5,11 @@ class FactorProfile:
         'questionText': str,
         'answer': str,
         'phoneNumber': str,
-        'credentialId': str
+        'credentialId': str,
+        'deviceType': str,
+        'name': str,
+        'platform': str,
+        'version': str
     }
 
     def __init__(self):
@@ -24,3 +28,11 @@ class FactorProfile:
 
         # unique id for instance
         self.credentialId = None  # str
+
+        self.deviceType = None
+
+        self.name = None
+
+        self.platform = None
+
+        self.version = None
