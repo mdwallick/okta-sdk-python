@@ -5,6 +5,7 @@ from okta.models.factor.Factor import Factor
 from okta.models.factor.Question import Question
 from okta.models.factor.FactorVerificationResponse import FactorVerificationResponse
 from okta.models.factor.FactorDevice import FactorDevice
+from okta.models.factor.ActivationResponse import ActivationResponse
 
 
 class FactorsClient(ApiClient):
@@ -62,6 +63,16 @@ class FactorsClient(ApiClient):
         response = ApiClient.post_path(self, '/{0}/factors'.format(user_id), factor_enroll_request, params=params)
         return Utils.deserialize(response.text, Factor)
 
+    def push_activation_poll(self, url):
+        """Enroll a user into a factor
+
+        :param url: push enrollment polling URL
+        :type url: str
+        :rtype: ActivationResponse
+        """
+        response = ApiClient.post(self, url)
+        return Utils.deserialize(response.text, ActivationResponse)
+
     def get_factor(self, user_id, user_factor_id):
         """Get information about an enrolled factor
 
@@ -101,7 +112,7 @@ class FactorsClient(ApiClient):
 
     # FACTOR LIFECYCLE
 
-    def activate_factor(self, user_id, user_factor_id, passcode, next_passcode=None):
+    def activate_factor(self, user_id, user_factor_id, passcode):
         """Activate an enrolled factor
 
         :param user_id: target user id
@@ -110,13 +121,10 @@ class FactorsClient(ApiClient):
         :type user_factor_id: str
         :param passcode: code required for activation
         :type passcode: str
-        :param next_passcode: code usually required for TOTP
-        :type next_passcode: str
         :rtype: Factor
         """
         request = {
-            'passCode': passcode,
-            'next_passcode': next_passcode
+            'passCode': passcode
         }
         response = ApiClient.post_path(self, '/{0}/factors/{1}/lifecycle/activate'.format(user_id, user_factor_id), request)
         return Utils.deserialize(response.text, Factor)
