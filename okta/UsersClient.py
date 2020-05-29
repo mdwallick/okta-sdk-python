@@ -1,7 +1,8 @@
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
-from okta.models.user import AppLinks
+from okta.models.user.ActivationResponse import ActivationResponse
+from okta.models.user.AppLinks import AppLinks
 from okta.models.user.User import User
 from okta.models.user.TempPassword import TempPassword
 from okta.models.user.ResetPasswordToken import ResetPasswordToken
@@ -138,15 +139,18 @@ class UsersClient(ApiClient):
 
     # LIFECYCLE
     
-    def activate_user(self, uid):
+    def activate_user(self, uid, send_email=True):
         """Activate user by target id
 
         :param uid: the target user id
         :type uid: str
         :return: User
         """
-        response = ApiClient.post_path(self, '/{0}/lifecycle/activate'.format(uid))
-        return Utils.deserialize(response.text, self.user_class)
+        params = {
+            'sendEmail': send_email
+        }
+        response = ApiClient.post_path(self, '/{0}/lifecycle/activate'.format(uid), params=params)
+        return Utils.deserialize(response.text, ActivationResponse)
 
     def deactivate_user(self, uid):
         """Deactivate user by target id
