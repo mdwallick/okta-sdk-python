@@ -21,7 +21,8 @@ class FactorsClient(ApiClient):
         :type user_id: str
         :rtype: list of FactorCatalogEntry
         """
-        response = ApiClient.get_path(self, '/{0}/factors/catalog'.format(user_id))
+        response = ApiClient.get_path(
+            self, '/{0}/factors/catalog'.format(user_id))
         return Utils.deserialize(response.text, FactorCatalogEntry)
 
     def get_lifecycle_factors(self, user_id):
@@ -43,7 +44,8 @@ class FactorsClient(ApiClient):
         :type user_id: str
         :rtype: list of Question
         """
-        response = ApiClient.get_path(self, '/{0}/factors/questions'.format(user_id))
+        response = ApiClient.get_path(
+            self, '/{0}/factors/questions'.format(user_id))
         return Utils.deserialize(response.text, Question)
 
     def enroll_factor(self, user_id, factor_enroll_request, update_phone=None):
@@ -60,11 +62,12 @@ class FactorsClient(ApiClient):
         params = {
             'updatePhone': update_phone
         }
-        response = ApiClient.post_path(self, '/{0}/factors'.format(user_id), factor_enroll_request, params=params)
+        response = ApiClient.post_path(
+            self, '/{0}/factors'.format(user_id), factor_enroll_request, params=params)
         return Utils.deserialize(response.text, Factor)
 
     def push_activation_poll(self, url):
-        """Enroll a user into a factor
+        """Poll for push enrollment activation
 
         :param url: push enrollment polling URL
         :type url: str
@@ -82,7 +85,8 @@ class FactorsClient(ApiClient):
         :type user_factor_id: str
         :rtype: Factor
         """
-        response = ApiClient.get_path(self, '/{0}/factors/{1}'.format(user_id, user_factor_id))
+        response = ApiClient.get_path(
+            self, '/{0}/factors/{1}'.format(user_id, user_factor_id))
         return Utils.deserialize(response.text, Factor)
 
     def update_factor(self, user_id, user_factor_id, factor_enroll_request):
@@ -96,7 +100,8 @@ class FactorsClient(ApiClient):
         :type factor_enroll_request: FactorEnrollRequest
         :rtype: Factor
         """
-        response = ApiClient.put_path(self, '/{0}/factors/{1}'.format(user_id, user_factor_id), factor_enroll_request)
+        response = ApiClient.put_path(
+            self, '/{0}/factors/{1}'.format(user_id, user_factor_id), factor_enroll_request)
         return Utils.deserialize(response.text, Factor)
 
     def reset_factor(self, user_id, user_factor_id):
@@ -108,7 +113,8 @@ class FactorsClient(ApiClient):
         :type user_factor_id: str
         :rtype: None
         """
-        ApiClient.delete_path(self, '/{0}/factors/{1}'.format(user_id, user_factor_id))
+        ApiClient.delete_path(
+            self, '/{0}/factors/{1}'.format(user_id, user_factor_id))
 
     # FACTOR LIFECYCLE
 
@@ -126,7 +132,8 @@ class FactorsClient(ApiClient):
         request = {
             'passCode': passcode
         }
-        response = ApiClient.post_path(self, '/{0}/factors/{1}/lifecycle/activate'.format(user_id, user_factor_id), request)
+        response = ApiClient.post_path(
+            self, '/{0}/factors/{1}/lifecycle/activate'.format(user_id, user_factor_id), request)
         return Utils.deserialize(response.text, Factor)
 
     def resend_code(self, user_id, user_factor_id):
@@ -138,10 +145,11 @@ class FactorsClient(ApiClient):
         :type user_factor_id: str
         :return:
         """
-        response = ApiClient.post_path(self, '/{0}/factors/{1}/resend'.format(user_id, user_factor_id))
+        response = ApiClient.post_path(
+            self, '/{0}/factors/{1}/resend'.format(user_id, user_factor_id))
         return Utils.deserialize(response.text, Factor)
 
-    def verify_factor(self, user_id, user_factor_id, activation_token=None, answer=None, passcode=None, next_passcode=None):
+    def verify_factor(self, user_id, user_factor_id, activation_token=None, answer=None, passcode=None):
         """Verify an enrolled factor
 
         :param user_id: target user id
@@ -154,17 +162,30 @@ class FactorsClient(ApiClient):
         :type answer: str
         :param passcode: code required for verification
         :type passcode: str
-        :param next_passcode: code usually required for TOTP
-        :type next_passcode: str
         :return:
         """
-        request = {
-            'activationToken': activation_token,
-            'answer': answer,
-            'passCode': passcode,
-            'nextPassCode': next_passcode
-        }
-        response = ApiClient.post_path(self, '/{0}/factors/{1}/verify'.format(user_id, user_factor_id), request)
+        request = {}
+        if activation_token != None:
+            request.update({'activation_token': activation_token})
+
+        if answer != None:
+            request.update({'answer': answer})
+
+        if passcode != None:
+            request.update({'passCode': passcode})
+
+        response = ApiClient.post_path(
+            self, '/{0}/factors/{1}/verify'.format(user_id, user_factor_id), request)
+        return Utils.deserialize(response.text, FactorVerificationResponse)
+
+    def push_verification_poll(self, url):
+        """Poll for push verification
+
+        :param url: push polling URL
+        :type url: str
+        :rtype: ActivationResponse
+        """
+        response = ApiClient.get(self, url)
         return Utils.deserialize(response.text, FactorVerificationResponse)
 
     # FACTOR DEVICE CRUD
@@ -178,7 +199,8 @@ class FactorsClient(ApiClient):
         :type factor_enroll_request: FactorEnrollRequest
         :rtype: FactorDevice
         """
-        response = ApiClient.post_path(self, '/{0}/devices'.format(user_id), factor_enroll_request)
+        response = ApiClient.post_path(
+            self, '/{0}/devices'.format(user_id), factor_enroll_request)
         return Utils.deserialize(response.text, FactorDevice)
 
     def get_factor_device(self, user_id, user_factor_id, device_id):
@@ -192,7 +214,8 @@ class FactorsClient(ApiClient):
         :type device_id: str
         :rtype: FactorDevice
         """
-        response = ApiClient.get_path(self, '/{0}/factors/{1}/device/{2}'.format(user_id, user_factor_id, device_id))
+        response = ApiClient.get_path(
+            self, '/{0}/factors/{1}/device/{2}'.format(user_id, user_factor_id, device_id))
         return Utils.deserialize(response.text, FactorDevice)
 
     def update_factor_device(self, user_id, factor_device_request):
@@ -204,7 +227,8 @@ class FactorsClient(ApiClient):
         :type factor_device_request: FactorDeviceRequest
         :rtype: FactorDevice
         """
-        response = ApiClient.post_path(self, '/{0}/factors'.format(user_id), factor_device_request)
+        response = ApiClient.post_path(
+            self, '/{0}/factors'.format(user_id), factor_device_request)
         return Utils.deserialize(response.text, FactorDevice)
 
     # FACTOR DEVICE LIFECYCLE
