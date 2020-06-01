@@ -1,3 +1,6 @@
+from okta.models.Link import Link
+
+
 class FactorVerificationResponse:
 
     types = {
@@ -5,6 +8,14 @@ class FactorVerificationResponse:
         'state': str,
         'factorResultMessage': str,
         'expiryTime': str
+    }
+
+    dict_types = {
+        '_links': Link
+    }
+
+    alt_names = {
+        '_links': 'links'
     }
 
     def __init__(self):
