@@ -109,3 +109,4 @@ npm-debug.log
 travis_phantomjs
 .DS_Store
 .vscode
+venv
