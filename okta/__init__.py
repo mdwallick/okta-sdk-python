@@ -6,9 +6,6 @@
     :copyright: (c) 2015 by Okta.
     :license: Apache 2, see LICENSE.txt for more details.
 """
-
-__version__ = '0.1.2'
-
 from .AppInstanceClient import AppInstanceClient
 from .AuthClient import AuthClient
 from .EventsClient import EventsClient
