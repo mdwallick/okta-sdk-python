@@ -1,0 +1,99 @@
+{
+  "id": "00upofwtwaGmrmIsm0h7",
+  "status": "ACTIVE",
+  "created": "2020-02-10T19:42:29.000Z",
+  "activated": "2020-02-10T19:42:49.000Z",
+  "statusChanged": "2020-02-10T19:42:49.000Z",
+  "lastLogin": "2020-06-09T18:36:36.000Z",
+  "lastUpdated": "2020-06-04T00:38:02.000Z",
+  "passwordChanged": "2020-02-10T19:42:30.000Z",
+  "type": {
+      "id": "otycww5k33LAMvu980h7"
+  },
+  "profile": {
+      "profileUrl": "http://localhost",
+      "lastName": "Sumner",
+      "zipCode": "66224",
+      "preferredLanguage": "en",
+      "city": "Overland Park",
+      "displayName": "Gordon Sumner",
+      "timezone": "Etc/UTC",
+      "title": "Bass",
+      "locale": "en_GB",
+      "login": "gordon@mailinator.com",
+      "employeeNumber": "1234567890",
+      "division": "Finance",
+      "honorificSuffix": "Jr.",
+      "countryCode": "US",
+      "state": "KS",
+      "department": "Information Technology",
+      "email": "gordon@mailinator.com",
+      "manager": "Manny McManager",
+      "nickName": "Sting",
+      "costCenter": "Finance & Operations",
+      "secondEmail": "sting@mailinator.com",
+      "honorificPrefix": "Mr.",
+      "managerId": "0987654321",
+      "firstName": "Gordon",
+      "primaryPhone": "9135551213",
+      "postalAddress": "123 Main Street",
+      "mobilePhone": "9135551212",
+      "streetAddress": "123 Main Street",
+      "organization": "Thorax Studios, Ltd.",
+      "middleName": "A",
+      "userType": ""
+  },
+  "credentials": {
+      "password": {},
+      "recovery_question": {
+          "question": "What is the food you least liked as a child?"
+      },
+      "provider": {
+          "type": "OKTA",
+          "name": "OKTA"
+      }
+  },
+  "_links": {
+      "suspend": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/lifecycle/suspend",
+          "method": "POST"
+      },
+      "schema": {
+          "href": "https://wallick.oktapreview.com/api/v1/meta/schemas/user/osccww5k33LAMvu980h7"
+      },
+      "resetPassword": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/lifecycle/reset_password",
+          "method": "POST"
+      },
+      "forgotPassword": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/credentials/forgot_password",
+          "method": "POST"
+      },
+      "expirePassword": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/lifecycle/expire_password",
+          "method": "POST"
+      },
+      "changeRecoveryQuestion": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/credentials/change_recovery_question",
+          "method": "POST"
+      },
+      "self": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7"
+      },
+      "resetFactors": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/lifecycle/reset_factors",
+          "method": "POST"
+      },
+      "type": {
+          "href": "https://wallick.oktapreview.com/api/v1/meta/types/user/otycww5k33LAMvu980h7"
+      },
+      "changePassword": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/credentials/change_password",
+          "method": "POST"
+      },
+      "deactivate": {
+          "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/lifecycle/deactivate",
+          "method": "POST"
+      }
+  }
+}

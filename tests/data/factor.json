@@ -1,0 +1,40 @@
+{
+    "id": "ufss082hlipGNzCff0h7",
+    "factorType": "question",
+    "provider": "OKTA",
+    "vendorName": "OKTA",
+    "status": "ACTIVE",
+    "created": "2020-06-08T15:50:06.000Z",
+    "lastUpdated": "2020-06-08T15:50:06.000Z",
+    "profile": {
+        "question": "name_of_first_plush_toy",
+        "questionText": "What is the name of your first stuffed animal?"
+    },
+    "_links": {
+        "questions": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/factors/questions",
+            "hints": {
+                "allow": [
+                    "GET"
+                ]
+            }
+        },
+        "self": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7/factors/ufss082hlipGNzCff0h7",
+            "hints": {
+                "allow": [
+                    "GET",
+                    "DELETE"
+                ]
+            }
+        },
+        "user": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00upofwtwaGmrmIsm0h7",
+            "hints": {
+                "allow": [
+                    "GET"
+                ]
+            }
+        }
+    }
+}

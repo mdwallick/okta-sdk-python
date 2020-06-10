@@ -1,0 +1,42 @@
+{
+    "id": "00us1r8ltrdVHGEJU0h7",
+    "status": "STAGED",
+    "created": "2020-06-10T15:07:53.000Z",
+    "activated": null,
+    "statusChanged": null,
+    "lastLogin": null,
+    "lastUpdated": "2020-06-10T15:07:53.000Z",
+    "passwordChanged": null,
+    "type": {
+        "id": "otycww5k33LAMvu980h7"
+    },
+    "profile": {
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "mobilePhone": null,
+        "secondEmail": null,
+        "login": "isaac@mailinator.com",
+        "email": "isaac@mailinator.com"
+    },
+    "credentials": {
+        "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+        }
+    },
+    "_links": {
+        "schema": {
+            "href": "https://wallick.oktapreview.com/api/v1/meta/schemas/user/osccww5k33LAMvu980h7"
+        },
+        "activate": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00us1r8ltrdVHGEJU0h7/lifecycle/activate",
+            "method": "POST"
+        },
+        "self": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00us1r8ltrdVHGEJU0h7"
+        },
+        "type": {
+            "href": "https://wallick.oktapreview.com/api/v1/meta/types/user/otycww5k33LAMvu980h7"
+        }
+    }
+}
