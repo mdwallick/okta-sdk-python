@@ -110,3 +110,5 @@ travis_phantomjs
 .DS_Store
 .vscode
 venv
+.env
+examples
