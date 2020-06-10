@@ -1,8 +1,9 @@
----------------
+------------
 Installation
----------------
+------------
 
 Install using pip:
+
 ::
 
-    pip install okta
+    pip install okta-sdk-python
