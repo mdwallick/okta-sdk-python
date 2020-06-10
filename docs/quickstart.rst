@@ -1,24 +1,20 @@
----------------
+----------
 Quickstart
----------------
+----------
 
 Create a client
 ===============
 ::
 
     from okta import UsersClient
-    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
+    from okta.models.user import User
+    # https://developer.okta.com/docs/guides/create-an-api-token/overview/
     usersClient = UsersClient('https://example.oktapreview.com/',
                               '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
 
 Create a user
 =============
 ::
-
-    from okta import UsersClient
-    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
-    usersClient = UsersClient('https://example.oktapreview.com/',
-                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
 
     new_user = User(login='example@example.com',
                     email='example@example.com',
@@ -30,12 +26,6 @@ Activate a user
 ===============
 ::
 
-    from okta import UsersClient
-    from okta.models.user import User
-    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
-    usersClient = UsersClient('https://example.oktapreview.com/',
-                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
-
     user = usersClient.get_user('example@example.com')
     usersClient.activate_user(user.id)
 
@@ -43,12 +33,6 @@ Loop through a list
 ===================
 ::
 
-
-    from okta import UsersClient
-    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
-    usersClient = UsersClient('https://example.oktapreview.com/',
-                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
-    
     users = usersClient.get_paged_users()
     while True:
         for user in users.result:
