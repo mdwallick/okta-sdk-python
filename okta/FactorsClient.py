@@ -48,7 +48,7 @@ class FactorsClient(ApiClient):
             self, '/{0}/factors/questions'.format(user_id))
         return Utils.deserialize(response.text, Question)
 
-    def enroll_factor(self, user_id, factor_enroll_request, update_phone=None):
+    def enroll_factor(self, user_id, factor_enroll_request, update_phone=False, activate=False):
         """Enroll a user into a factor
 
         :param user_id: target user id
@@ -57,10 +57,17 @@ class FactorsClient(ApiClient):
         :type factor_enroll_request: FactorEnrollRequest
         :param update_phone: whether to update the user's phone during enrollment
         :type update_phone: bool
+        :param activate: whether to silently activate the factor without verification
+        :type activate: bool
         :rtype: Factor
         """
+        # TODO also account for activate=true/false
+        # if you wish to silently update the phone number (SMS/voice)
+        # you need to have both updatePhone=true&activate=true
+        # on the API call
         params = {
-            'updatePhone': update_phone
+            'updatePhone': update_phone,
+            'activate': activate
         }
         response = ApiClient.post_path(
             self, '/{0}/factors'.format(user_id), factor_enroll_request, params=params)
