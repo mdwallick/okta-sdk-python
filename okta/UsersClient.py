@@ -240,6 +240,17 @@ class UsersClient(ApiClient):
         response = ApiClient.post_path(self, '/{0}/credentials/change_password'.format(uid), data)
         return Utils.deserialize(response.text, LoginCredentials)
 
+    def change_recovery_question(self, uid, password, question, answer):
+        data = {
+            'password': { 'value': password },
+            'recovery_question': {
+                'question': question,
+                'answer': answer
+            }
+        }
+        response = ApiClient.post_path(self, '/{0}/credentials/change_recovery_question'.format(uid), data)
+        return Utils.deserialize(response.text, LoginCredentials)
+
     def expire_password(self, uid, temp_password=False):
         """Expire user's password by target user id
 
