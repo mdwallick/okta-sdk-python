@@ -111,4 +111,3 @@ travis_phantomjs
 .vscode
 venv
 .env
-examples
