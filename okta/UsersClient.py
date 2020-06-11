@@ -241,6 +241,17 @@ class UsersClient(ApiClient):
         return Utils.deserialize(response.text, LoginCredentials)
 
     def change_recovery_question(self, uid, password, question, answer):
+        """Changes a user's recovery question & answer by validating the user's current password
+
+        :param uid: the target user id
+        :type uid: str
+        :param password: the user's current password
+        :type password: str
+        :param question: the new recovery question
+        :type question: str
+        :param answer: the answer to the new recovery question
+        :type answer: str
+        """
         data = {
             'password': { 'value': password },
             'recovery_question': {
