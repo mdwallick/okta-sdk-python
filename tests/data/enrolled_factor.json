@@ -1,0 +1,47 @@
+{
+    "id": "emfs2tr7ifEjnQRlq0h7",
+    "factorType": "email",
+    "provider": "OKTA",
+    "vendorName": "OKTA",
+    "status": "PENDING_ACTIVATION",
+    "profile": {
+        "email": "testuser1@mailinator.com"
+    },
+    "_links": {
+        "resend": [
+            {
+                "name": "email",
+                "href": "https://wallick.oktapreview.com/api/v1/users/00us2t24pcYuHoQ5q0h7/factors/emfs2tr7ifEjnQRlq0h7/resend",
+                "hints": {
+                    "allow": [
+                        "POST"
+                    ]
+                }
+            }
+        ],
+        "activate": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00us2t24pcYuHoQ5q0h7/factors/emfs2tr7ifEjnQRlq0h7/lifecycle/activate",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "self": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00us2t24pcYuHoQ5q0h7/factors/emfs2tr7ifEjnQRlq0h7",
+            "hints": {
+                "allow": [
+                    "GET"
+                ]
+            }
+        },
+        "user": {
+            "href": "https://wallick.oktapreview.com/api/v1/users/00us2t24pcYuHoQ5q0h7",
+            "hints": {
+                "allow": [
+                    "GET"
+                ]
+            }
+        }
+    }
+}
