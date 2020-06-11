@@ -5,10 +5,10 @@ import json
 from flask_api import status
 from unittest import skipIf
 from unittest.mock import Mock, patch
-from okta.FactorsClient import FactorsClient
-from okta.framework.Utils import Utils
-from okta.framework.Serializer import Serializer
-from okta.models.factor.Factor import Factor
+from oktasdk.FactorsClient import FactorsClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.framework.Serializer import Serializer
+from oktasdk.models.factor.Factor import Factor
 
 
 class FactorsClientTest(unittest.TestCase):

@@ -1,7 +1,7 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.models.event.Event import Event
-from okta.framework.PagedResults import PagedResults
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.models.event.Event import Event
+from oktasdk.framework.PagedResults import PagedResults
 
 
 class EventsClient(ApiClient):

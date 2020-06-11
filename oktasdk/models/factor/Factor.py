@@ -1,7 +1,7 @@
 from datetime import datetime
-from okta.models.factor.FactorProfile import FactorProfile
-from okta.models.Link import Link
-from okta.models.factor.ActivationResponse import ActivationResponse
+from oktasdk.models.factor.FactorProfile import FactorProfile
+from oktasdk.models.Link import Link
+from oktasdk.models.factor.ActivationResponse import ActivationResponse
 
 class Factor:
 

@@ -1,5 +1,5 @@
-from okta.models.app.Hide import Hide
-from okta.models.app.AppLinks import AppLinks
+from oktasdk.models.app.Hide import Hide
+from oktasdk.models.app.AppLinks import AppLinks
 
 
 class Visibility:

@@ -1,9 +1,9 @@
-from okta.framework.Utils import Utils
-from okta.framework.Serializer import Serializer
-from okta.models.event.Event import Event
-from okta.models.user import AppLinks
-from okta.models.user.User import User
-from okta.models.auth.AuthResult import AuthResult
+from oktasdk.framework.Utils import Utils
+from oktasdk.framework.Serializer import Serializer
+from oktasdk.models.event.Event import Event
+from oktasdk.models.user import AppLinks
+from oktasdk.models.user.User import User
+from oktasdk.models.auth.AuthResult import AuthResult
 import unittest
 import json
 import types

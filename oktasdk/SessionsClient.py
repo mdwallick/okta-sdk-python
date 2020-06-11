@@ -1,7 +1,7 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.models.session.Credentials import Credentials
-from okta.models.session.Session import Session
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.models.session.Credentials import Credentials
+from oktasdk.models.session.Session import Session
 
 
 class SessionsClient(ApiClient):

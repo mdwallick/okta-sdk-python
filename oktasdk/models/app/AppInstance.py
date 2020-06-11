@@ -1,9 +1,9 @@
 from datetime import datetime
-from okta.models.app.Accessibility import Accessibility
-from okta.models.app.Visibility import Visibility
-from okta.models.app.AppCredentials import AppCredentials
-from okta.models.app.Settings import Settings
-from okta.models.app.AppSettings import AppSettings
+from oktasdk.models.app.Accessibility import Accessibility
+from oktasdk.models.app.Visibility import Visibility
+from oktasdk.models.app.AppCredentials import AppCredentials
+from oktasdk.models.app.Settings import Settings
+from oktasdk.models.app.AppSettings import AppSettings
 
 
 class AppInstance:

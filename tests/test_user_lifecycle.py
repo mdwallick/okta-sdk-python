@@ -6,16 +6,16 @@ import urllib
 from flask_api import status
 from unittest import skipIf
 from unittest.mock import Mock, patch
-from okta.UsersClient import UsersClient
-from okta.framework.OktaError import OktaError
-from okta.framework.Utils import Utils
-from okta.framework.Serializer import Serializer
-from okta.models.user.ActivationResponse import ActivationResponse
-from okta.models.user.LoginCredentials import LoginCredentials
-from okta.models.user.ResetPasswordToken import ResetPasswordToken
-from okta.models.user.TempPassword import TempPassword
-from okta.models.user.User import User
-from okta.models.usergroup.UserGroup import UserGroup
+from oktasdk.UsersClient import UsersClient
+from oktasdk.framework.OktaError import OktaError
+from oktasdk.framework.Utils import Utils
+from oktasdk.framework.Serializer import Serializer
+from oktasdk.models.user.ActivationResponse import ActivationResponse
+from oktasdk.models.user.LoginCredentials import LoginCredentials
+from oktasdk.models.user.ResetPasswordToken import ResetPasswordToken
+from oktasdk.models.user.TempPassword import TempPassword
+from oktasdk.models.user.User import User
+from oktasdk.models.usergroup.UserGroup import UserGroup
 
 
 class UsersClientTest(unittest.TestCase):

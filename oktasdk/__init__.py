@@ -1,9 +1,9 @@
 """
-    okta
+    oktasdk
     ~~~~~
     An SDK using the Okta APIs to manage Okta instances.
 
-    :copyright: (c) 2015 by Okta.
+    :copyright: (c) 2020 by Okta.
     :license: Apache 2, see LICENSE.txt for more details.
 """
 from .AppInstanceClient import AppInstanceClient

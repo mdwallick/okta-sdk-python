@@ -1,6 +1,6 @@
-from okta.models.user.Provider import Provider
-from okta.models.user.Password import Password
-from okta.models.user.RecoveryQuestion import RecoveryQuestion
+from oktasdk.models.user.Provider import Provider
+from oktasdk.models.user.Password import Password
+from oktasdk.models.user.RecoveryQuestion import RecoveryQuestion
 
 
 class LoginCredentials:

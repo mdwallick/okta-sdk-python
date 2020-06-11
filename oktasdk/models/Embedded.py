@@ -1,5 +1,5 @@
-from okta.models.user.User import User
-from okta.models.factor.Factor import Factor
+from oktasdk.models.user.User import User
+from oktasdk.models.factor.Factor import Factor
 
 
 class Embedded:

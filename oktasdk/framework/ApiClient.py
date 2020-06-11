@@ -1,9 +1,9 @@
 import requests
 import json
-import time
-from okta.framework.Serializer import Serializer
-from okta.framework.OktaError import OktaError
 import six
+import time
+from oktasdk.framework.Serializer import Serializer
+from oktasdk.framework.OktaError import OktaError
 
 
 class ApiClient(object):

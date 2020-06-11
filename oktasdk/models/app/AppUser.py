@@ -1,6 +1,6 @@
 from datetime import datetime
-from okta.models.app.AppUserCredentials import AppUserCredentials
-from okta.models.app.AppUserProfile import AppUserProfile
+from oktasdk.models.app.AppUserCredentials import AppUserCredentials
+from oktasdk.models.app.AppUserProfile import AppUserProfile
 
 
 class AppUser:

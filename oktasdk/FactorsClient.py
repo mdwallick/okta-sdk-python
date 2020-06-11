@@ -1,11 +1,11 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.models.factor.FactorCatalogEntry import FactorCatalogEntry
-from okta.models.factor.Factor import Factor
-from okta.models.factor.Question import Question
-from okta.models.factor.FactorVerificationResponse import FactorVerificationResponse
-from okta.models.factor.FactorDevice import FactorDevice
-from okta.models.factor.ActivationResponse import ActivationResponse
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.models.factor.FactorCatalogEntry import FactorCatalogEntry
+from oktasdk.models.factor.Factor import Factor
+from oktasdk.models.factor.Question import Question
+from oktasdk.models.factor.FactorVerificationResponse import FactorVerificationResponse
+from oktasdk.models.factor.FactorDevice import FactorDevice
+from oktasdk.models.factor.ActivationResponse import ActivationResponse
 
 
 class FactorsClient(ApiClient):

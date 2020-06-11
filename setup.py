@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = "Okta"
+NAME = "OktaSDK"
 DESCRIPTION = "Okta management SDK for Python. Forked from https://github.com/okta/okta-sdk-python."
 URL = "https://github.com/mdwallick/okta-sdk-python"
 EMAIL = "mike@wallick.net"

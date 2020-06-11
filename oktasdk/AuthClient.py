@@ -1,6 +1,6 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.models.auth.AuthResult import AuthResult
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.models.auth.AuthResult import AuthResult
 
 
 class AuthClient(ApiClient):

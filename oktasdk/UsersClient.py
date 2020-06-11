@@ -1,13 +1,13 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.framework.PagedResults import PagedResults
-from okta.models.user.ActivationResponse import ActivationResponse
-from okta.models.user.AppLinks import AppLinks
-from okta.models.user.User import User
-from okta.models.user.TempPassword import TempPassword
-from okta.models.user.ResetPasswordToken import ResetPasswordToken
-from okta.models.user.LoginCredentials import LoginCredentials
-from okta.models.usergroup.UserGroup import UserGroup
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.framework.PagedResults import PagedResults
+from oktasdk.models.user.ActivationResponse import ActivationResponse
+from oktasdk.models.user.AppLinks import AppLinks
+from oktasdk.models.user.LoginCredentials import LoginCredentials
+from oktasdk.models.user.ResetPasswordToken import ResetPasswordToken
+from oktasdk.models.user.TempPassword import TempPassword
+from oktasdk.models.user.User import User
+from oktasdk.models.usergroup.UserGroup import UserGroup
 
 
 class UsersClient(ApiClient):

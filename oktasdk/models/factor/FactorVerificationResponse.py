@@ -1,4 +1,4 @@
-from okta.models.Link import Link
+from oktasdk.models.Link import Link
 
 
 class FactorVerificationResponse:

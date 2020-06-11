@@ -1,5 +1,5 @@
-from okta.models.app.UserNameTemplate import UserNameTemplate
-from okta.models.user.Password import Password
+from oktasdk.models.app.UserNameTemplate import UserNameTemplate
+from oktasdk.models.user.Password import Password
 
 
 class AppCredentials:

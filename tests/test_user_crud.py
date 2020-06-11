@@ -5,11 +5,11 @@ import urllib
 
 from flask_api import status
 from unittest.mock import Mock, patch
-from okta.UsersClient import UsersClient
-from okta.framework.Utils import Utils
-from okta.framework.Serializer import Serializer
-from okta.models.user.User import User
-from okta.models.usergroup.UserGroup import UserGroup
+from oktasdk.UsersClient import UsersClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.framework.Serializer import Serializer
+from oktasdk.models.user.User import User
+from oktasdk.models.usergroup.UserGroup import UserGroup
 
 
 class UsersClientTest(unittest.TestCase):

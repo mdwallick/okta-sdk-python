@@ -1,6 +1,6 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.models.factor.OrgAuthFactor import OrgAuthFactor
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.models.factor.OrgAuthFactor import OrgAuthFactor
 
 
 class FactorsAdminClient(ApiClient):

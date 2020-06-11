@@ -1,4 +1,4 @@
-from okta.models.Embedded import Embedded
+from oktasdk.models.Embedded import Embedded
 
 
 class AuthResult:

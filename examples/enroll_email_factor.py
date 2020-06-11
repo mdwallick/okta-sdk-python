@@ -1,6 +1,6 @@
-from okta.UsersClient import UsersClient
-from okta.FactorsClient import FactorsClient
-from okta.framework.OktaError import OktaError
+from oktasdk.UsersClient import UsersClient
+from oktasdk.FactorsClient import FactorsClient
+from oktasdk.framework.OktaError import OktaError
 from script_config import base_url, api_token, user_id
 
 usersClient = UsersClient(base_url=base_url, api_token=api_token)

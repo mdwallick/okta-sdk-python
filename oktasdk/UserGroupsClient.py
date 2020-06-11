@@ -1,8 +1,8 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.models.user.User import User
-from okta.models.usergroup.UserGroup import UserGroup
-from okta.framework.PagedResults import PagedResults
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.models.user.User import User
+from oktasdk.models.usergroup.UserGroup import UserGroup
+from oktasdk.framework.PagedResults import PagedResults
 
 
 class UserGroupsClient(ApiClient):

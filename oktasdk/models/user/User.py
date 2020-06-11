@@ -1,8 +1,7 @@
 from datetime import datetime
-
-from okta.models.user.LoginCredentials import LoginCredentials
-from okta.models.user.UserProfile import UserProfile
-from okta.models.Link import Link
+from oktasdk.models.user.LoginCredentials import LoginCredentials
+from oktasdk.models.user.UserProfile import UserProfile
+from oktasdk.models.Link import Link
 
 
 class User:

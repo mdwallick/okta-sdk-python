@@ -2,8 +2,8 @@
 If you have custom attributes on your Okta user profile, you need to
 create a subclass of User and UserProfile.
 """
-from okta.models.user.User import User
-from okta.models.user.UserProfile import UserProfile
+from oktasdk.models.user.User import User
+from oktasdk.models.user.UserProfile import UserProfile
 
 class ExtendedUser(User):
     def __init__(self, **kwargs):

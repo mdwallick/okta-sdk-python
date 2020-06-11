@@ -1,7 +1,7 @@
-from okta.framework.ApiClient import ApiClient
-from okta.framework.Utils import Utils
-from okta.framework.PagedResults import PagedResults
-from okta.models.app.AppInstance import AppInstance
+from oktasdk.framework.ApiClient import ApiClient
+from oktasdk.framework.Utils import Utils
+from oktasdk.framework.PagedResults import PagedResults
+from oktasdk.models.app.AppInstance import AppInstance
 
 
 class AppInstanceClient(ApiClient):

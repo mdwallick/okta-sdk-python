@@ -1,6 +1,6 @@
 from json import dumps, JSONEncoder
 from datetime import datetime
-from okta.framework.Utils import Utils
+from oktasdk.framework.Utils import Utils
 
 
 class Serializer(JSONEncoder):

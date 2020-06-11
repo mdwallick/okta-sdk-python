@@ -1,7 +1,7 @@
 from datetime import datetime
-from okta.models.event.Action import Action
-from okta.models.event.Actor import Actor
-from okta.models.event.Target import Target
+from oktasdk.models.event.Action import Action
+from oktasdk.models.event.Actor import Actor
+from oktasdk.models.event.Target import Target
 
 
 class Event:

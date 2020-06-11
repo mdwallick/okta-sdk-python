@@ -1,4 +1,4 @@
-from okta.framework.Utils import Utils
+from oktasdk.framework.Utils import Utils
 
 
 class PagedResults(object):

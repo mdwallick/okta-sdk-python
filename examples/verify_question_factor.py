@@ -1,9 +1,9 @@
 import getpass
 import json
 
-from okta.UsersClient import UsersClient
-from okta.FactorsClient import FactorsClient
-from okta.framework.OktaError import OktaError
+from oktasdk.UsersClient import UsersClient
+from oktasdk.FactorsClient import FactorsClient
+from oktasdk.framework.OktaError import OktaError
 from script_config import api_token, base_url, user_id, get_factor_id_by_type
 
 usersClient = UsersClient(base_url=base_url, api_token=api_token)

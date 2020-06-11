@@ -1,6 +1,7 @@
 [run]
 source = okta/
-omit = venv/*
+omit = examples/*
     scripts/*
     tests/*
+    venv/*
     setup.py

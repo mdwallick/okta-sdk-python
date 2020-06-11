@@ -1,5 +1,5 @@
-from okta.models.usergroup.UserGroupProfile import UserGroupProfile
-from okta.models.Link import Link
+from oktasdk.models.usergroup.UserGroupProfile import UserGroupProfile
+from oktasdk.models.Link import Link
 
 
 class UserGroup:

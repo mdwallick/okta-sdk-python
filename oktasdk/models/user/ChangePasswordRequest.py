@@ -1,4 +1,4 @@
-from okta.models.user import Password
+from oktasdk.models.user import Password
 
 
 class ChangePasswordRequest:

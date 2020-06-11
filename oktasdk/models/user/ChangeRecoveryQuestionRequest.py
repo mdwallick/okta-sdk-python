@@ -1,4 +1,4 @@
-from okta.models.user import Password, RecoveryQuestion
+from oktasdk.models.user import Password, RecoveryQuestion
 
 
 class ChangeRecoveryQuestionRequest:

@@ -1,4 +1,4 @@
-from okta.models.app.AppSettings import AppSettings
+from oktasdk.models.app.AppSettings import AppSettings
 
 
 class Settings:

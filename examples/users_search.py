@@ -1,9 +1,9 @@
 import json
 
-from okta.UsersClient import UsersClient
-from okta.models.user.User import User
-from okta.framework.OktaError import OktaError
-from okta.framework.Serializer import Serializer
+from oktasdk.UsersClient import UsersClient
+from oktasdk.models.user.User import User
+from oktasdk.framework.OktaError import OktaError
+from oktasdk.framework.Serializer import Serializer
 from script_config import base_url, api_token
 
 usersClient = UsersClient(

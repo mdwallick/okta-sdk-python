@@ -1,10 +1,10 @@
 import json
 import time
 
-from okta.FactorsClient import FactorsClient
-from okta.models.factor.Factor import Factor
-from okta.framework.OktaError import OktaError
-from okta.framework.Serializer import Serializer
+from oktasdk.FactorsClient import FactorsClient
+from oktasdk.models.factor.Factor import Factor
+from oktasdk.framework.OktaError import OktaError
+from oktasdk.framework.Serializer import Serializer
 from script_config import base_url, api_token, user_id
 
 factorsClient = FactorsClient(base_url=base_url, api_token=api_token)
