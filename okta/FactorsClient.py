@@ -61,10 +61,6 @@ class FactorsClient(ApiClient):
         :type activate: bool
         :rtype: Factor
         """
-        # TODO also account for activate=true/false
-        # if you wish to silently update the phone number (SMS/voice)
-        # you need to have both updatePhone=true&activate=true
-        # on the API call
         params = {
             'updatePhone': update_phone,
             'activate': activate
