@@ -1,0 +1,34 @@
+{
+    "id": "00grsuobu6NnfNXo30h7",
+    "created": "2020-05-28T16:45:18.000Z",
+    "lastUpdated": "2020-05-28T16:45:18.000Z",
+    "lastMembershipUpdated": "2020-06-10T17:29:32.000Z",
+    "objectClass": [
+        "okta:user_group"
+    ],
+    "type": "OKTA_GROUP",
+    "profile": {
+        "name": "A Test Users",
+        "description": null
+    },
+    "_links": {
+        "logo": [
+            {
+                "name": "medium",
+                "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png",
+                "type": "image/png"
+            },
+            {
+                "name": "large",
+                "href": "https://op1static.oktacdn.com/assets/img/logos/groups/okta-large.511fcb0de9da185b52589cb14d581c2c.png",
+                "type": "image/png"
+            }
+        ],
+        "users": {
+            "href": "https://wallick.oktapreview.com/api/v1/groups/00grsuobu6NnfNXo30h7/users"
+        },
+        "apps": {
+            "href": "https://wallick.oktapreview.com/api/v1/groups/00grsuobu6NnfNXo30h7/apps"
+        }
+    }
+}

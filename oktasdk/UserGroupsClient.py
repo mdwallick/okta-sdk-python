@@ -12,18 +12,21 @@ class UserGroupsClient(ApiClient):
 
     # CRUD
 
-    def get_groups(self, limit=None, query=None):
+    def get_groups(self, limit=None, query=None, filter_string=None):
         """Get a list of UserGroups
 
         :param limit: maximum number of groups to return
         :type limit: int or None
         :param query: string to search group names
         :type query: str or None
+        :param filter_string: filter expression to search by
+        :type filter_string: str
         :rtype: list of UserGroup
         """
         params = {
             'limit': limit,
-            'q': query
+            'q': query,
+            'filter': filter_string
         }
         response = ApiClient.get_path(self, '/', params=params)
         return Utils.deserialize(response.text, UserGroup)

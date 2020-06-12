@@ -6,6 +6,7 @@ class UserGroup:
 
     types = {
         'id': str,
+        'type': str,
         'objectClass': str,
         'profile': UserGroupProfile
     }
@@ -22,6 +23,9 @@ class UserGroup:
 
         # unique key for group
         self.id = None  # str
+
+        # group type, e.g. OKTA_GROUP
+        self.type = None # str
 
         # determines the groups profile
         self.objectClass = None  # enum
