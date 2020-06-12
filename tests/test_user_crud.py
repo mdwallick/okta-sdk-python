@@ -3,10 +3,14 @@ import os
 import unittest
 import urllib
 
+from dotenv import load_dotenv
 from flask_api import status
+from os import path
 from unittest import skipIf
 from unittest.mock import Mock, patch
+
 from oktasdk.UsersClient import UsersClient
+from oktasdk.framework.OktaError import OktaError
 from oktasdk.framework.Utils import Utils
 from oktasdk.framework.Serializer import Serializer
 from oktasdk.models.user.User import User
@@ -19,6 +23,12 @@ class UserCrudTest(unittest.TestCase):
     def setUp(self):
         self.client = UsersClient(base_url="https://mockta.com",
                                   api_token="abcdefg")
+
+        self.basedir = path.abspath(path.dirname(__file__))
+        load_dotenv(path.join(self.basedir, ".env"))
+
+        self.base_url = os.getenv("BASE_URL", None)
+        self.api_token = os.getenv("API_TOKEN", None)
 
         with open("tests/data/user.json", "r") as file:
             self.user = file.read()
@@ -52,7 +62,43 @@ class UserCrudTest(unittest.TestCase):
 
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
-        #self.assertEqual(response.status, "STAGED")
+
+    @skipIf(os.getenv("SKIP_REAL", True) == True, "Skipping tests that hit the real API server.")
+    def test_create_user_with_invalid_usernane_raises_okta_error(self):
+        user = User(
+            login="badusername", # username must be in domain format
+            email="badusername@mailinator.com",
+            firstName="Bad",
+            lastName="Username"
+        )
+        
+        with self.assertRaises(OktaError):
+            # get a real user from a real Okta tenant
+            real_client = UsersClient(base_url=self.base_url, api_token=self.api_token)
+            _response = real_client.create_user(user)
+
+    @skipIf(os.getenv("SKIP_REAL", True) == True, "Skipping tests that hit the real API server.")
+    def test_user_data_model_matches_real_api(self):
+        # get a real user from a real Okta tenant
+        real_client = UsersClient(base_url=self.base_url, api_token=self.api_token)
+        #actual = real_client.get_user("00upofwtwaGmrmIsm0h7")
+        actual = real_client.get_users(limit=1)[0]
+        # take the object, serialize it to a string
+        actual_str = json.dumps(actual, cls=Serializer, separators=(',', ':'))
+        # then load is back as JSON so we can get the keys
+        actual_json = json.loads(actual_str)
+
+        # call the mock API
+        with patch("oktasdk.framework.ApiClient.requests.get") as mock_get:
+            mock_get.return_value = Mock(
+                status_code=status.HTTP_200_OK, text=self.user)
+            user_id = self.user_json.id
+            mocked = self.client.get_user(user_id)
+            mocked_str = json.dumps(
+                mocked, cls=Serializer, separators=(',', ':'))
+            mocked_json = json.loads(mocked_str)
+
+        self.assertTrue(json_compare(actual_json, mocked_json))
 
     @patch("oktasdk.framework.ApiClient.requests.post")
     def test_update_user_partial_update_returns_ok(self, mock_post):
@@ -63,7 +109,6 @@ class UserCrudTest(unittest.TestCase):
 
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
-        #self.assertEqual(response.status, "STAGED")
 
     @patch("oktasdk.framework.ApiClient.requests.put")
     def test_update_user_full_update_returns_ok(self, mock_put):
@@ -74,7 +119,6 @@ class UserCrudTest(unittest.TestCase):
 
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
-        #self.assertEqual(response.status, "STAGED")
 
     @patch("oktasdk.framework.ApiClient.requests.delete")
     def test_delete_user_returns_ok(self, mock_delete):
@@ -205,9 +249,6 @@ class UserCrudTest(unittest.TestCase):
 
     @patch("oktasdk.framework.ApiClient.requests.get")
     def test_list_users_with_filter_by_lastUpdated_returns_ok(self, mock_get):
-        # filter supports a limited set of properties:
-        # status, lastUpdated, id, profile.login, profile.email,
-        # profile.firstName, and profile.lastName
         filter_string = urllib.parse.quote_plus(
             "lastUpdated gt \"2019-12-17T00:00:00.000Z\"")
         filtered_users = self.users
@@ -222,9 +263,6 @@ class UserCrudTest(unittest.TestCase):
 
     @patch("oktasdk.framework.ApiClient.requests.get")
     def test_list_users_with_filter_by_id_returns_ok(self, mock_get):
-        # filter supports a limited set of properties:
-        # status, lastUpdated, id, profile.login, profile.email,
-        # profile.firstName, and profile.lastName
         user_id = self.user_json.id
         filter_string = urllib.parse.quote_plus(
             "id eq \"{0}\"".format(user_id))
@@ -242,9 +280,6 @@ class UserCrudTest(unittest.TestCase):
 
     @patch("oktasdk.framework.ApiClient.requests.get")
     def test_list_users_with_filter_by_login_returns_ok(self, mock_get):
-        # filter supports a limited set of properties:
-        # status, lastUpdated, id, profile.login, profile.email,
-        # profile.firstName, and profile.lastName
         login = "gordon@mailinator.com"
         filter_string = urllib.parse.quote_plus(
             "profile.login eq \"{0}\"".format(login))
@@ -262,9 +297,6 @@ class UserCrudTest(unittest.TestCase):
 
     @patch("oktasdk.framework.ApiClient.requests.get")
     def test_list_users_with_filter_by_email_returns_ok(self, mock_get):
-        # filter supports a limited set of properties:
-        # status, lastUpdated, id, profile.login, profile.email,
-        # profile.firstName, and profile.lastName
         email = "gordon@mailinator.com"
         filter_string = urllib.parse.quote_plus(
             "profile.email eq \"{0}\"".format(email))
@@ -282,9 +314,6 @@ class UserCrudTest(unittest.TestCase):
 
     @patch("oktasdk.framework.ApiClient.requests.get")
     def test_list_users_with_filter_by_first_name_returns_ok(self, mock_get):
-        # filter supports a limited set of properties:
-        # status, lastUpdated, id, profile.login, profile.email,
-        # profile.firstName, and profile.lastName
         first_name = "Gordon"
         filter_string = urllib.parse.quote_plus(
             "profile.firstName eq \"{0}\"".format(first_name))
@@ -302,9 +331,6 @@ class UserCrudTest(unittest.TestCase):
 
     @patch("oktasdk.framework.ApiClient.requests.get")
     def test_list_users_with_filter_by_last_name_returns_ok(self, mock_get):
-        # filter supports a limited set of properties:
-        # status, lastUpdated, id, profile.login, profile.email,
-        # profile.firstName, and profile.lastName
         last_name = "Sumner"
         filter_string = urllib.parse.quote_plus(
             "profile.lastName eq \"{0}\"".format(last_name))
@@ -331,47 +357,3 @@ class UserCrudTest(unittest.TestCase):
         self.assertIsInstance(response, list)
         self.assertIsInstance(response[0], UserGroup)
         self.assertEqual(len(response), 3)
-
-    @skipIf(os.getenv("SKIP_REAL", True) == True, "Skipping tests that hit the real API server.")
-    def test_user_data_model_matches_real_api(self):
-        from dotenv import load_dotenv
-        from os import path
-
-        basedir = path.abspath(path.dirname(__file__))
-        load_dotenv(path.join(basedir, ".env"))
-
-        base_url = os.getenv("BASE_URL", None)
-        api_token = os.getenv("API_TOKEN", None)
-
-        # get a real user from a real Okta tenant
-        real_client = UsersClient(base_url=base_url, api_token=api_token)
-        #actual = real_client.get_user("00upofwtwaGmrmIsm0h7")
-        actual = real_client.get_users(limit=1)[0]
-        # take the object, serialize it to a string
-        actual_str = json.dumps(actual, cls=Serializer, separators=(',', ':'))
-        # then load is back as JSON so we can get the keys
-        actual_json = json.loads(actual_str)
-
-        # call the mock API
-        with patch("oktasdk.framework.ApiClient.requests.get") as mock_get:
-            mock_get.return_value = Mock(
-                status_code=status.HTTP_200_OK, text=self.user)
-            user_id = self.user_json.id
-            mocked = self.client.get_user(user_id)
-            mocked_str = json.dumps(
-                mocked, cls=Serializer, separators=(',', ':'))
-            mocked_json = json.loads(mocked_str)
-
-        self.assertTrue(json_compare(actual_json, mocked_json))
-
-    # helper function to compare JSON documents
-    # def json_compare(self, data1, data2):
-    #     for key in data1.keys():
-    #         if key in data2.keys():
-    #             if type(data1[key]) == dict:
-    #                 if not self.json_compare(data1[key], data2[key]):
-    #                     return False
-    #         else:
-    #             print("{0} not in data2.keys()...".format(key))
-    #             return False
-    #     return True
