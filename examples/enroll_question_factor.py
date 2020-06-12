@@ -19,18 +19,9 @@ chosen_question = available_questions[chosen_number - 1]
 question = chosen_question.question
 answer = input("{0}: ".format(chosen_question.questionText))
 
-enroll_request = {
-    "factorType": "question",
-    "provider": "OKTA",
-    "profile": {
-        "question": question,
-        "answer": answer
-    }
-}
-
 print("Enroll question factor started")
 try:
-    response = factorsClient.enroll_factor(user_id, enroll_request)
+    response = factorsClient.enroll_question_factor(user_id, question, answer)
     print("Security question enrolled")
 except OktaError as e:
     print(e.error_causes)

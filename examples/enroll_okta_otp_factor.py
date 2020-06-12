@@ -8,14 +8,9 @@ factorsClient = FactorsClient(base_url=base_url, api_token=api_token)
 
 user = usersClient.get_user(user_id)
 
-enroll_request = {
-    "factorType": "token:software:totp",
-    "provider": "OKTA"
-}
-
 print("Enroll Okta Verify OTP factor started")
 try:
-    response = factorsClient.enroll_factor(user_id, enroll_request)
+    response = factorsClient.enroll_okta_otp_factor(user_id)
     result = response.status
     factor_id = response.id
     qrcode_url = response.embedded.get("activation").links.get("qrcode").href

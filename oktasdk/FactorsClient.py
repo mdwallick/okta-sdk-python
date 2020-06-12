@@ -48,8 +48,125 @@ class FactorsClient(ApiClient):
             self, '/{0}/factors/questions'.format(user_id))
         return Utils.deserialize(response.text, Question)
 
+    def enroll_email_factor(self, user_id, email):
+        """Enroll a user into the email factor
+
+        :param user_id: target user id
+        :type user_id: str
+        :param email: the email address to enroll
+        :type email: str
+        """
+        enroll_request = {
+            "factorType": "email",
+            "provider": "OKTA",
+            "profile": {
+                "email": email
+            }
+        }
+        return self.enroll_factor(user_id, enroll_request)
+
+    def enroll_sms_factor(self, user_id, phone_number, update_phone=False, activate=False):
+        """Enroll a user into the SMS factor
+
+        :param user_id: target user id
+        :type user_id: str
+        :param phone_number: the phone number to enroll
+        :type phone_number: str
+        """
+        enroll_request = {
+            "factorType": "sms",
+            "provider": "OKTA",
+            "profile": {
+                "PhoneNumber": phone_number
+            }
+        }
+        return self.enroll_factor(user_id, enroll_request, update_phone, activate)
+
+    def enroll_call_factor(self, user_id, phone_number, update_phone=False, activate=False):
+        """Enroll a user into the voice call factor
+
+        :param user_id: target user id
+        :type user_id: str
+        :param phone_number: the phone number to enroll
+        :type phone_number: str
+        """
+        enroll_request = {
+            "factorType": "call",
+            "provider": "OKTA",
+            "profile": {
+                "PhoneNumber": phone_number
+            }
+        }
+        return self.enroll_factor(user_id, enroll_request, update_phone, activate)
+
+    def enroll_google_authenticator_factor(self, user_id):
+        """Enroll a user into the Google Authenticator factor
+
+        :param user_id: target user id
+        :type user_id: str
+        """
+        enroll_request = {
+            "factorType": "token:software:totp",
+            "provider": "GOOGLE"
+        }
+        return self.enroll_factor(user_id, enroll_request)
+
+    def enroll_okta_otp_factor(self, user_id):
+        """Enroll a user into the Okta Verify OTP factor
+
+        :param user_id: target user id
+        :type user_id: str
+        """
+        enroll_request = {
+            "factorType": "token:software:totp",
+            "provider": "OKTA"
+        }
+        return self.enroll_factor(user_id, enroll_request)
+
+    def enroll_okta_push_factor(self, user_id):
+        """Enroll a user into the Okta Verify Push factor
+
+        :param user_id: target user id
+        :type user_id: str
+        """
+        enroll_request = {
+            "factorType": "push",
+            "provider": "OKTA"
+        }
+        return self.enroll_factor(user_id, enroll_request)
+
+    def push_activation_poll(self, url):
+        """Poll for push enrollment activation
+
+        :param url: push enrollment polling URL
+        :type url: str
+        :rtype: ActivationResponse
+        """
+        response = ApiClient.post(self, url)
+        return Utils.deserialize(response.text, ActivationResponse)
+
+    def enroll_question_factor(self, user_id, question, answer):
+        """Enroll a user into the security question factor
+
+        :param user_id: target user id
+        :type user_id: str
+        :param question: the security question
+        :type question: str
+        :param answer: the answer to the question
+        :type answer: str
+        """
+        enroll_request = {
+            "factorType": "question",
+            "provider": "OKTA",
+            "profile": {
+                "question": question,
+                "answer": answer
+            }
+        }
+        return self.enroll_factor(user_id, enroll_request)
+
     def enroll_factor(self, user_id, factor_enroll_request, update_phone=False, activate=False):
-        """Enroll a user into a factor
+        """Enroll a user into a factor 
 
         :param user_id: target user id
         :type user_id: str
@@ -69,16 +186,6 @@ class FactorsClient(ApiClient):
             self, '/{0}/factors'.format(user_id), factor_enroll_request, params=params)
         return Utils.deserialize(response.text, Factor)
 
-    def push_activation_poll(self, url):
-        """Poll for push enrollment activation
-
-        :param url: push enrollment polling URL
-        :type url: str
-        :rtype: ActivationResponse
-        """
-        response = ApiClient.post(self, url)
-        return Utils.deserialize(response.text, ActivationResponse)
-
     def get_factor(self, user_id, user_factor_id):
         """Get information about an enrolled factor
 
@@ -90,21 +197,6 @@ class FactorsClient(ApiClient):
         """
         response = ApiClient.get_path(
             self, '/{0}/factors/{1}'.format(user_id, user_factor_id))
-        return Utils.deserialize(response.text, Factor)
-
-    def update_factor(self, user_id, user_factor_id, factor_enroll_request):
-        """Update an enrolled factor
-
-        :param user_id: target user id
-        :type user_id: str
-        :param user_factor_id: target factor id
-        :type user_factor_id: str
-        :param factor_enroll_request: data to update the factor
-        :type factor_enroll_request: FactorEnrollRequest
-        :rtype: Factor
-        """
-        response = ApiClient.put_path(
-            self, '/{0}/factors/{1}'.format(user_id, user_factor_id), factor_enroll_request)
         return Utils.deserialize(response.text, Factor)
 
     def reset_factor(self, user_id, user_factor_id):
@@ -190,68 +282,3 @@ class FactorsClient(ApiClient):
         """
         response = ApiClient.get(self, url)
         return Utils.deserialize(response.text, FactorVerificationResponse)
-
-    # FACTOR DEVICE CRUD
-
-    def enroll_factor_device(self, user_id, factor_enroll_request):
-        """Enroll a factor device for a user
-
-        :param user_id: target user id
-        :type user_id: str
-        :param factor_enroll_request: data to enroll the factor device
-        :type factor_enroll_request: FactorEnrollRequest
-        :rtype: FactorDevice
-        """
-        response = ApiClient.post_path(
-            self, '/{0}/devices'.format(user_id), factor_enroll_request)
-        return Utils.deserialize(response.text, FactorDevice)
-
-    def get_factor_device(self, user_id, user_factor_id, device_id):
-        """Get a factor device for a user
-
-        :param user_id: target user id
-        :type user_id: str
-        :param user_factor_id: target factor id
-        :type user_factor_id: str
-        :param device_id: target factor device id
-        :type device_id: str
-        :rtype: FactorDevice
-        """
-        response = ApiClient.get_path(
-            self, '/{0}/factors/{1}/device/{2}'.format(user_id, user_factor_id, device_id))
-        return Utils.deserialize(response.text, FactorDevice)
-
-    def update_factor_device(self, user_id, factor_device_request):
-        """Update a factor device for a user
-
-        :param user_id: target user id
-        :type user_id: str
-        :param factor_device_request: data to update the factor device
-        :type factor_device_request: FactorDeviceRequest
-        :rtype: FactorDevice
-        """
-        response = ApiClient.post_path(
-            self, '/{0}/factors'.format(user_id), factor_device_request)
-        return Utils.deserialize(response.text, FactorDevice)
-
-    # FACTOR DEVICE LIFECYCLE
-
-    def activate_factor_device(self, user_id, user_factor_id, device_id, passcode):
-        """Activate a factor device for a user
-
-        :param user_id: target user id
-        :type user_id: str
-        :param user_factor_id: target factor id
-        :type user_factor_id: str
-        :param device_id: target factor device id
-        :type device_id: str
-        :param passcode: code required to activate the factor device
-        :type passcode: str
-        :rtype: FactorDevice
-        """
-        request = {
-            'passCode': passcode
-        }
-        response = ApiClient.post_path(self, '/{0}/factors/{1}/devices/{2}/lifecycle/activate'.format(
-            user_id, user_factor_id, device_id), request)
-        return Utils.deserialize(response.text, Factor)

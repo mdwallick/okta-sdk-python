@@ -9,14 +9,9 @@ from script_config import base_url, api_token, user_id
 
 factorsClient = FactorsClient(base_url=base_url, api_token=api_token)
 
-enroll_request = {
-    "factorType": "push",
-    "provider": "OKTA"
-}
-
 print("Enroll push factor started")
 try:
-    response = factorsClient.enroll_factor(user_id, enroll_request)
+    response = factorsClient.enroll_okta_push_factor(user_id)
     poll_url = response.links.get("poll").href
     qrcode_url = response.embedded.get("activation").links.get("qrcode").href
     expires_at = response.embedded.get("activation").expiresAt

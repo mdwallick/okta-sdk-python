@@ -7,18 +7,11 @@ usersClient = UsersClient(base_url=base_url, api_token=api_token)
 factorsClient = FactorsClient(base_url=base_url, api_token=api_token)
 
 user = usersClient.get_user(user_id)
+email = user.profile.email
 
-enroll_request = {
-    "factorType": "email",
-    "provider": "OKTA",
-    "profile": {
-        "email": user.profile.email
-    }
-}
-
-print("Enroll email factor started: {0}".format(user.profile.email))
+print("Enroll email factor started: {0}".format(email))
 try:
-    response = factorsClient.enroll_factor(user_id, enroll_request)
+    response = factorsClient.enroll_email_factor(user_id, email)
     result = response.status
     factor_id = response.id
 except OktaError as e:

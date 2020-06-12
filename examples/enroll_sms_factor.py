@@ -10,16 +10,9 @@ user = usersClient.get_user(user_id)
 
 print("Enroll SMS factor started")
 phone_number = input("Please enter your phone number (just numbers please): ")
-enroll_request = {
-    "factorType": "sms",
-    "provider": "OKTA",
-    "profile": {
-        "phoneNumber": phone_number
-    }
-}
 
 try:
-    response = factorsClient.enroll_factor(user_id, enroll_request)
+    response = factorsClient.enroll_sms_factor(user_id, phone_number)
     result = response.status
     factor_id = response.id
 except OktaError as e:
