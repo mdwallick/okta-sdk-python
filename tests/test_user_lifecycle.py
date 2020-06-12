@@ -18,7 +18,7 @@ from oktasdk.models.user.User import User
 from oktasdk.models.usergroup.UserGroup import UserGroup
 
 
-class UsersClientTest(unittest.TestCase):
+class UserLifecycleTest(unittest.TestCase):
 
     def setUp(self):
         self.client = UsersClient(base_url="https://mockta.com",
@@ -47,7 +47,7 @@ class UsersClientTest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_activate_user_in_staged_status_returns_ok(self, mock_post):
         user = self.created_user_json
         activation_response = """
@@ -63,7 +63,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, ActivationResponse)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_activate_user_not_in_staged_status_raises_okta_error(self, mock_post):
         user = self.created_user_json
         activation_response = """
@@ -82,7 +82,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.activate_user(user.id, send_email=False)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_deactivate_user_not_in_deprovisioned_status_returns_ok(self, mock_post):
         user = self.created_user_json
         deactivation_response = "{}"
@@ -93,7 +93,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_deactivate_user_in_deprovisioned_status_raises_okta_error(self, mock_post):
         user = self.created_user_json
         deactivation_response = """
@@ -112,7 +112,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.deactivate_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_suspend_user_in_active_status_returns_ok(self, mock_post):
         user = self.created_user_json
         deactivation_response = "{}"
@@ -123,7 +123,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_suspend_user_not_in_active_status_raises_okta_error(self, mock_post):
         user = self.created_user_json
         suspend_response = """
@@ -146,7 +146,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.suspend_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_suspend_user_not_found_raises_okta_error(self, mock_post):
         user = self.created_user_json
         suspend_response = """
@@ -165,7 +165,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.suspend_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_unsuspend_user_in_suspend_status_returns_ok(self, mock_post):
         user = self.created_user_json
         unsuspend_response = "{}"
@@ -176,7 +176,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_unsuspend_user_not_in_suspend_status_raises_okta_error(self, mock_post):
         user = self.created_user_json
         unsuspend_response = """
@@ -199,7 +199,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.suspend_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_unsuspend_user_not_found_raises_okta_error(self, mock_post):
         user = self.created_user_json
         unsuspend_response = """
@@ -218,7 +218,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.suspend_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_unlock_user_in_locked_out_status_returns_ok(self, mock_post):
         user = self.created_user_json
         unlock_response = "{}"
@@ -229,7 +229,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_unlock_user_not_found_raises_okta_error(self, mock_post):
         user = self.created_user_json
         unlock_response = """
@@ -248,7 +248,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.suspend_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_unlock_user_not_in_locked_out_status_raises_okta_error(self, mock_post):
         user = self.created_user_json
         unlock_response = """
@@ -271,7 +271,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.unlock_user(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_reset_password_returns_ok(self, mock_post):
         user = self.created_user_json
         reset_password_response = """
@@ -286,7 +286,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, ResetPasswordToken)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_reset_password_user_not_found_raises_okta_error(self, mock_post):
         user = self.created_user_json
         reset_password_response = """
@@ -305,7 +305,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.reset_password(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_change_password_returns_ok(self, mock_post):
         user = self.created_user_json
         change_password_response = """
@@ -327,7 +327,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, LoginCredentials)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_change_recovery_question_returns_ok(self, mock_post):
         user = self.created_user_json
         change_recovery_question_response = """
@@ -349,7 +349,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, LoginCredentials)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_expire_password_no_temp_password_returns_ok(self, mock_post):
         user = self.created_user_json
         expire_password_response = self.created_user
@@ -360,7 +360,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, TempPassword)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_expire_password_with_temp_password_returns_ok(self, mock_post):
         user = self.created_user_json
         expire_password_response = """
@@ -375,7 +375,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, TempPassword)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_expire_password_user_not_found_raises_okta_error(self, mock_post):
         user = self.created_user_json
         expire_password_response = """
@@ -394,7 +394,7 @@ class UsersClientTest(unittest.TestCase):
             response = self.client.expire_password(user.id)
             self.assertIsNotNone(response)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_reset_factors_returns_ok(self, mock_post):
         user = self.created_user_json
         reset_factor_response = "{}"
@@ -405,7 +405,7 @@ class UsersClientTest(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(response, User)
 
-    @patch("okta.framework.ApiClient.requests.post")
+    @patch("oktasdk.framework.ApiClient.requests.post")
     def test_reset_factors_user_not_found_raises_okta_error(self, mock_post):
         user = self.created_user_json
         reset_factor_response = """
