@@ -16,4 +16,4 @@ def get_factor_id_by_type(factors, factor_type, provider="OKTA"):
         if factor.factorType == factor_type and factor.provider == provider:
             return (factor.id, factor.profile)
     
-    return None
+    return (None, None)
