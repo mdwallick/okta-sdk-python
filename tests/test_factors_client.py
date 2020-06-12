@@ -11,6 +11,7 @@ from oktasdk.framework.Serializer import Serializer
 from oktasdk.models.factor.Factor import Factor
 from oktasdk.models.factor.FactorCatalogEntry import FactorCatalogEntry
 from oktasdk.models.factor.Question import Question
+from .testutils import json_compare
 
 
 class FactorsClientTest(unittest.TestCase):

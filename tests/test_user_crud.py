@@ -11,6 +11,7 @@ from oktasdk.framework.Utils import Utils
 from oktasdk.framework.Serializer import Serializer
 from oktasdk.models.user.User import User
 from oktasdk.models.usergroup.UserGroup import UserGroup
+from .testutils import json_compare
 
 
 class UserCrudTest(unittest.TestCase):
@@ -361,16 +362,16 @@ class UserCrudTest(unittest.TestCase):
                 mocked, cls=Serializer, separators=(',', ':'))
             mocked_json = json.loads(mocked_str)
 
-        self.assertTrue(self.json_compare(actual_json, mocked_json))
+        self.assertTrue(json_compare(actual_json, mocked_json))
 
     # helper function to compare JSON documents
-    def json_compare(self, data1, data2):
-        for key in data1.keys():
-            if key in data2.keys():
-                if type(data1[key]) == dict:
-                    if not self.json_compare(data1[key], data2[key]):
-                        return False
-            else:
-                print("{0} not in data2.keys()...".format(key))
-                return False
-        return True
+    # def json_compare(self, data1, data2):
+    #     for key in data1.keys():
+    #         if key in data2.keys():
+    #             if type(data1[key]) == dict:
+    #                 if not self.json_compare(data1[key], data2[key]):
+    #                     return False
+    #         else:
+    #             print("{0} not in data2.keys()...".format(key))
+    #             return False
+    #     return True
