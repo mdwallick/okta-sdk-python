@@ -21,13 +21,9 @@ pip install okta-sdk-python
 ## Usage
 
 See the [examples directory](https://github.com/mdwallick/okta-sdk-python/tree/master/examples)
-for usage samples. Copy `.env.example` to `.env` and fill in your base URL and API token.
+for usage samples.
 
-```shell
-BASE_URL=https://SUBDOMAIN.okta.com
-API_TOKEN=
-USER_ID=Okta user ID you want to test with
-```
+## Documentation
 
 Full [class documentation](https://todo.url) is also available.
 
